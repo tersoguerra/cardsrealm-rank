@@ -55,4 +55,11 @@ def rank_teams_players():
 
 
 if __name__ == "__main__":
-    rank_teams()
+    input_title = "Welcome to MTG CardsRealm ranking script!\n" \
+                  "If you want to rank team's players, type Y\n" \
+                  "Else, will be executed teams rank\n"
+    input_text = input(input_title)
+    if input_text.upper() == "Y":
+        rank_teams_players()
+    else:
+        rank_teams()

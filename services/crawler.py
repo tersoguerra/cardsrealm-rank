@@ -1,7 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support.ui import WebDriverWait
+import time
 
 
 class Crawler(object):
@@ -36,6 +38,13 @@ class Crawler(object):
         if element is not None:
             text = element.text
         return text
+
+    def send_input(self, xpath, text):
+        element = self.get_element(xpath)
+        element.send_keys(text)
+        time.sleep(1)
+        element.send_keys(Keys.ENTER)
+        time.sleep(1)
 
     def __del__(self):
         driver_windows = self.driver.window_handles

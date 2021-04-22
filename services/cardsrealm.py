@@ -14,13 +14,19 @@ class CardsRealm(object):
         url = f"{self.domain}teams/"
         self.crawler.get_url(url)
 
-        xpath = '//*[@id="search_display_div"]/a'
-        elements = self.crawler.get_elements(xpath)
+        queries = ["a", "e", "i", "o", "u"]
+        for query in queries:
 
-        for element in elements:
-            name = element.get_attribute("title")
-            url = element.get_attribute("href")
-            teams_dict[name] = {"url": url}
+            search_xpath = '//*[@id="inputSearchCard"]'
+            self.crawler.send_input(search_xpath, query)
+
+            xpath = '//*[@id="search_display_div"]/a'
+            elements = self.crawler.get_elements(xpath)
+
+            for element in elements:
+                name = element.get_attribute("title")
+                url = element.get_attribute("href")
+                teams_dict[name] = {"url": url}
 
         return teams_dict
 
